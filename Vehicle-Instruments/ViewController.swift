@@ -25,7 +25,9 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         try! OBDIIPID.createMessageForIdentifier(OBDIIEngineCoolantTemperature),
         try! OBDIIPID.createMessageForIdentifier(OBDIIRPM),
         try! OBDIIPID.createMessageForIdentifier(OBDIISpeed),
-        try! OBDIIPID.createMessageForIdentifier(OBDIIMAF)
+        try! OBDIIPID.createMessageForIdentifier(OBDIIMAF),
+        try! OBDIIPID.createMessageForIdentifier(OBDIIPercentTorque),
+        try! OBDIIPID.createMessageForIdentifier(OBDIIReferenceTorque)
     ])
     
     let gps = CLLocationManager()
@@ -132,6 +134,10 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     func didReceivedOBDValue(obd: OBDII, identifier: String, value: Double) {
         self.hideStatusText()
         
+        struct TorqueData {
+            static var torqueRef = 0.0
+        }
+        
         // Process OBD data
         [
             OBDIIEngineLoadValue: self.setLoadValue,
@@ -147,6 +153,14 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
                 // 0.33 == Thermal loss etc.
                 // 1.34 == kW to PS ratio
                 self.setPowerValue($0/15.2 * 46.0 * 0.33 * 1.34)
+            },
+            OBDIIPercentTorque: {
+                if TorqueData.torqueRef != 0.0 {
+                    self.setTorqueValue($0 * (TorqueData.torqueRef / 100.0))
+                }
+            },
+            OBDIIReferenceTorque: {
+                TorqueData.torqueRef = $0
             }
         ][identifier]?(value)
     }

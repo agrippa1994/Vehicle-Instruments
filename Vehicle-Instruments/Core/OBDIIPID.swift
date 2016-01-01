@@ -14,6 +14,8 @@ let OBDIIThrottleValue = "Trottle Value"
 let OBDIIRPM = "RPM"
 let OBDIISpeed = "Speed"
 let OBDIIMAF = "MAF"
+let OBDIIPercentTorque = "Percent Torque"
+let OBDIIReferenceTorque = "Reference Torque"
 
 enum OBDIIPIDException: ErrorType {
     case InvalidData
@@ -87,6 +89,14 @@ class OBDIIPID {
         
         OBDIIPIDEntry(mode: 0x01, pid: 0x10, responseLength: 2, identifier: OBDIIMAF) { data in
             return ((Double(data[0]) * 256.0) + Double(data[1])) / 100.0
+        },
+    
+        OBDIIPIDEntry(mode: 0x01, pid: 0x62, responseLength: 1, identifier: OBDIIPercentTorque) { data in
+            return Double(data[0]) - 125.0
+        },
+        
+        OBDIIPIDEntry(mode: 0x01, pid: 0x63, responseLength: 2, identifier: OBDIIReferenceTorque) { data in
+            return (Double(data[0]) * 256.0) + Double(data[1])
         }
     ]
     
