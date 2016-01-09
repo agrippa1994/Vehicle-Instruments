@@ -70,6 +70,14 @@ class OBDII : NSObject, NSStreamDelegate {
     }
     
     func close() {
+        if self.inStream == nil || self.outStream == nil {
+            return
+        }
+        
+        if self.outStream!.streamStatus == NSStreamStatus.Open || self.outStream!.hasSpaceAvailable {
+            self.write("ATPC")
+        }
+        
         self.inStream?.close()
         self.outStream?.close()
     }
@@ -79,6 +87,7 @@ class OBDII : NSObject, NSStreamDelegate {
             return false
         }
         
+        NSLog("Write: \(data)")
         if self.outStream!.streamStatus != NSStreamStatus.Open || !self.outStream!.hasSpaceAvailable {
             return false
         }
@@ -155,7 +164,7 @@ class OBDII : NSObject, NSStreamDelegate {
     }
     
     func initializeProcessor() {
-        self.write("AT Z")
+        self.write("ATZ")
     }
     
     func processBuffer() {

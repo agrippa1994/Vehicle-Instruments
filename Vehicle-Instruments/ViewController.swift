@@ -18,16 +18,14 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     @IBOutlet weak var loadLabel: UILabel!
     @IBOutlet weak var powerLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var torqueLabel: UILabel!
+    @IBOutlet weak var mafLabel: UILabel!
     
     let obd = OBDII(messageBuffer: [
         try! OBDIIPID.createMessageForIdentifier(OBDIIEngineLoadValue),
         try! OBDIIPID.createMessageForIdentifier(OBDIIEngineCoolantTemperature),
         try! OBDIIPID.createMessageForIdentifier(OBDIIRPM),
         try! OBDIIPID.createMessageForIdentifier(OBDIISpeed),
-        try! OBDIIPID.createMessageForIdentifier(OBDIIMAF),
-        try! OBDIIPID.createMessageForIdentifier(OBDIIPercentTorque),
-        try! OBDIIPID.createMessageForIdentifier(OBDIIReferenceTorque)
+        try! OBDIIPID.createMessageForIdentifier(OBDIIMAF)
     ])
     
     let gps = CLLocationManager()
@@ -42,7 +40,7 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         self.setLoadValue(0.0)
         self.setPowerValue(0.0)
         self.setTempValue(0.0)
-        self.setTorqueValue(0.0)
+        self.setMAFValue(0.0)
         
         // Set delegates
         self.obd.delegate = self
@@ -55,7 +53,11 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         // Initialize OBD
         self.connectInOneSecond()
         
-        
+        // Setup application callbacks
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: Selector("applicationWillTerminate"), name: UIApplicationWillTerminateNotification, object: nil)
+        center.addObserver(self, selector: Selector("applicationDidEnterBackground"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        center.addObserver(self, selector: Selector("applicationWillEnterForeground"), name: UIApplicationWillEnterForegroundNotification, object: nil)
         setStatusText("Connecting ...")
     }
 
@@ -108,8 +110,21 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         self.tempLabel.text = String(format: "%.0f °C", value)
     }
     
-    func setTorqueValue(value: Double) {
-        self.torqueLabel.text = String(format: "%.0f Nm", value)
+    func setMAFValue(value: Double) {
+        self.mafLabel.text = String(format: "%.1f g/s", value)
+    }
+    
+    // MARK: - Notification methods
+    func applicationWillTerminate() {
+        self.obd.close()
+    }
+    
+    func applicationDidEnterBackground() {
+        self.obd.close()
+    }
+    
+    func applicationWillEnterForeground() {
+        self.obd.open()
     }
     
     // MARK: - Timer methods
@@ -134,10 +149,6 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     func didReceivedOBDValue(obd: OBDII, identifier: String, value: Double) {
         self.hideStatusText()
         
-        struct TorqueData {
-            static var torqueRef = 0.0
-        }
-        
         // Process OBD data
         [
             OBDIIEngineLoadValue: self.setLoadValue,
@@ -145,6 +156,8 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
             OBDIIRPM: self.setRPMValue,
             OBDIISpeed: self.setSpeedValue,
             OBDIIMAF: {
+                self.setMAFValue($0)
+                
                 // Source1 https://www.scantool.net/forum/index.php?topic=6439.msg23763#msg23763
                 // Source2 https://thoughtdraw.wordpress.com/2011/02/20/derive-engine-power-using-obd-data/
                 
@@ -153,14 +166,6 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
                 // 0.33 == Thermal loss etc.
                 // 1.34 == kW to PS ratio
                 self.setPowerValue($0/15.2 * 46.0 * 0.33 * 1.34)
-            },
-            OBDIIPercentTorque: {
-                if TorqueData.torqueRef != 0.0 {
-                    self.setTorqueValue($0 * (TorqueData.torqueRef / 100.0))
-                }
-            },
-            OBDIIReferenceTorque: {
-                TorqueData.torqueRef = $0
             }
         ][identifier]?(value)
     }
