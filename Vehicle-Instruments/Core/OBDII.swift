@@ -23,8 +23,13 @@ import CoreFoundation
 class OBDII : NSObject, NSStreamDelegate {
     weak var delegate: OBDIIDelegate?
     
-    let serverAddress = "192.168.0.10"
-    let serverPort: UInt32 = 35000
+    var serverAddress : String {
+        return Settings.ip
+    }
+    
+    var serverPort: UInt32 {
+        return Settings.port
+    }
     
     //let serverAddress = "localhost"
     //let serverPort: UInt32 = 3000

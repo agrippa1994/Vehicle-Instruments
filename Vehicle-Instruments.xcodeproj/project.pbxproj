@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CA0AA4E1C43C4CE00ACBACA /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0AA4D1C43C4CE00ACBACA /* SettingsTableViewController.swift */; };
+		3CA0AA501C43C4F600ACBACA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0AA4F1C43C4F600ACBACA /* Settings.swift */; };
 		3CC05D381C348DE00051E588 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC05D371C348DE00051E588 /* AppDelegate.swift */; };
 		3CC05D3A1C348DE00051E588 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC05D391C348DE00051E588 /* ViewController.swift */; };
 		3CC05D3D1C348DE00051E588 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CC05D3B1C348DE00051E588 /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3CA0AA4D1C43C4CE00ACBACA /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		3CA0AA4F1C43C4F600ACBACA /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3CC05D341C348DE00051E588 /* Vehicle-Instruments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vehicle-Instruments.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CC05D371C348DE00051E588 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CC05D391C348DE00051E588 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +74,8 @@
 				3CC05D3E1C348DE00051E588 /* Assets.xcassets */,
 				3CC05D401C348DE00051E588 /* LaunchScreen.storyboard */,
 				3CC05D431C348DE00051E588 /* Info.plist */,
+				3CA0AA4D1C43C4CE00ACBACA /* SettingsTableViewController.swift */,
+				3CA0AA4F1C43C4F600ACBACA /* Settings.swift */,
 			);
 			path = "Vehicle-Instruments";
 			sourceTree = "<group>";
@@ -165,10 +171,12 @@
 			files = (
 				3CC05D3A1C348DE00051E588 /* ViewController.swift in Sources */,
 				3CC6D2D61C35697100CA1B15 /* String+Split.swift in Sources */,
+				3CA0AA501C43C4F600ACBACA /* Settings.swift in Sources */,
 				3CC6D2D51C35697100CA1B15 /* Array+Remove.swift in Sources */,
 				3CC6D2D41C35697100CA1B15 /* OBDIIPID.swift in Sources */,
 				3CC6D2D31C35697100CA1B15 /* OBDII.swift in Sources */,
 				3CC05D381C348DE00051E588 /* AppDelegate.swift in Sources */,
+				3CA0AA4E1C43C4CE00ACBACA /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate, SettingsTableViewControllerDelegate {
 
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
@@ -74,6 +74,12 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let ctrl = (segue.destinationViewController as? UINavigationController)?.topViewController as? SettingsTableViewController {
+            ctrl.delegate = self
+        }
     }
     
     func hideStatusText() {
@@ -180,6 +186,15 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let speed = locations.last?.speed {
             self.setGPSValue(speed >= 0 ? speed * 3.6 : 0.0)
+        }
+    }
+    
+    func settingsClose(controller: SettingsTableViewController, changesToSettings: Bool) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+        
+        if changesToSettings {
+            obd.close()
+            obd.open()
         }
     }
 }
