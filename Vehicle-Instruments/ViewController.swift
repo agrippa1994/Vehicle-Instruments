@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import BDCamera
 
 class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate, SettingsTableViewControllerDelegate {
 
@@ -20,6 +21,9 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var mafLabel: UILabel!
     
+    var camera: BDStillImageCamera!
+    let gps = CLLocationManager()
+    
     let obd = OBDII(messageBuffer: [
         try! OBDIIPID.createMessageForIdentifier(OBDIIEngineLoadValue),
         try! OBDIIPID.createMessageForIdentifier(OBDIIEngineCoolantTemperature),
@@ -28,11 +32,12 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         try! OBDIIPID.createMessageForIdentifier(OBDIIMAF)
     ])
     
-    let gps = CLLocationManager()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // Create camera view
+        self.camera = BDStillImageCamera(previewView: self.view)
+       
         // Initialize UI
         self.setSpeedValue(0.0)
         self.setRPMValue(0.0)
@@ -50,20 +55,26 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         self.gps.activityType = .AutomotiveNavigation
         self.gps.desiredAccuracy = kCLLocationAccuracyBest
         
-        // Initialize OBD
-        self.connectInOneSecond()
-        
         // Setup application callbacks
         let center = NSNotificationCenter.defaultCenter()
         center.addObserver(self, selector: Selector("applicationWillTerminate"), name: UIApplicationWillTerminateNotification, object: nil)
         center.addObserver(self, selector: Selector("applicationDidEnterBackground"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
         center.addObserver(self, selector: Selector("applicationWillEnterForeground"), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        center.addObserver(self, selector: Selector("orientationChanged"), name: UIDeviceOrientationDidChangeNotification, object: nil)
         setStatusText("Connecting ...")
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        // Start camera background
+        self.camera.startCameraCapture()
+ 
+        // Initialize OBD
+        self.connectInOneSecond()
+        self.camera.videoCaptureConnection().videoOrientation = .LandscapeRight
+        
+        // Request GPS privileges
         if CLLocationManager.authorizationStatus() == .NotDetermined {
             self.gps.requestWhenInUseAuthorization()
         } else {
@@ -73,7 +84,6 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -84,6 +94,17 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     
     func hideStatusText() {
         self.statusLabel.hidden = true
+    }
+    
+    func updateCameraRotation() {
+        switch UIApplication.sharedApplication().statusBarOrientation {
+        case .LandscapeLeft:
+            self.camera.previewLayer.connection.videoOrientation = .LandscapeLeft
+        case .LandscapeRight:
+            self.camera.previewLayer.connection.videoOrientation = .LandscapeRight
+        default:
+            break
+        }
     }
     
     // MARK: - Setter functions
@@ -123,14 +144,21 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     // MARK: - Notification methods
     func applicationWillTerminate() {
         self.obd.close()
+        self.camera.stopCameraCapture()
     }
     
     func applicationDidEnterBackground() {
         self.obd.close()
+        self.camera.stopCameraCapture()
     }
     
     func applicationWillEnterForeground() {
+        self.camera.startCameraCapture()
         self.obd.open()
+    }
+    
+    func orientationChanged() {
+        self.updateCameraRotation()
     }
     
     // MARK: - Timer methods

@@ -1,0 +1,10 @@
+PODS:
+  - BDCamera (0.2)
+
+DEPENDENCIES:
+  - BDCamera (~> 0.1)
+
+SPEC CHECKSUMS:
+  BDCamera: a48688e2edfbb7e4d09b4813aa9c510f31eb947b
+
+COCOAPODS: 0.38.2

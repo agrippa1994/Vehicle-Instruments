@@ -29,25 +29,30 @@ class SettingsTableViewController: UITableViewController {
     
     @IBAction func onDone(sender: AnyObject) {
         guard let ipString = self.ipAdressTextField.text else {
-            return self.showAlert("Error", text: "Invalid")
+            return self.showAlert("Error",
+                text: "Invalid")
         }
         
         guard let portString = self.portTextField.text else {
-            return self.showAlert("Error", text: "Invalid")
+            return self.showAlert("Error",
+                text: "Invalid")
         }
         
     
         if ipString.isEmpty || portString.isEmpty {
-            return self.showAlert("Error", text: "Invalid IP or port")
+            return self.showAlert("Error",
+                text: "Invalid IP or port")
         }
         
         guard let port = UInt32(portString) else {
-            return self.showAlert("Error", text: "Port is not an integer")
+            return self.showAlert("Error",
+                text: "Port is not an integer")
         }
         
         // Check changes
         var changes = false
-        if port != Settings.port || ipString != Settings.ip {
+        if port != Settings.port
+            || ipString != Settings.ip {
             changes = true
         }
         
@@ -56,13 +61,20 @@ class SettingsTableViewController: UITableViewController {
         Settings.port = port
         
         // Notify delegate
-        self.delegate?.settingsClose(self, changesToSettings: changes)
+        self.delegate?.settingsClose(self,
+            changesToSettings: changes)
     }
     
     private func showAlert(title: String, text: String) {
-        let ctrl = UIAlertController(title: title, message: text, preferredStyle: .Alert)
-        ctrl.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        self.presentViewController(ctrl, animated: true, completion: nil)
+        let ctrl = UIAlertController(title: title,
+            message: text,
+            preferredStyle: .Alert)
+        ctrl.addAction(UIAlertAction(title: "OK",
+            style: .Default,
+            handler: nil))
+        self.presentViewController(ctrl,
+            animated: true,
+            completion: nil)
     }
 
 }

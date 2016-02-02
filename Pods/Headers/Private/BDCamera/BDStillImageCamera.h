@@ -1,0 +1,1 @@
+../../../BDCamera/BDCamera/BDStillImageCamera.h
