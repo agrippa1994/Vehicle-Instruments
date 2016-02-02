@@ -32,21 +32,53 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         try! OBDIIPID.createMessageForIdentifier(OBDIIMAF)
     ])
     
+    var speed: Double = 0.0 {
+        didSet {
+            self.speedLabel.text = String(format: "%.0f", speed)
+        }
+    }
+    
+    var rpm: Double = 0.0 {
+        didSet {
+            self.rpmLabel.text = String(format: "%.0f", rpm)
+        }
+    }
+    
+    var gpsSpeed: Double = 0.0 {
+        didSet {
+            self.gpsSpeedLabel.text = String(format: "%.0f", gpsSpeed)
+        }
+    }
+    var load: Double = 0.0 {
+        didSet {
+            self.loadLabel.text = String(format: "%.0f %%", load)
+        }
+    }
+    
+    var power: Double = 0.0 {
+        didSet {
+            self.powerLabel.text = String(format: "%.0f PS", power)
+        }
+    }
+    
+    var temperature: Double = 0.0 {
+        didSet {
+            self.tempLabel.text = String(format: "%.0f °C", temperature)
+        }
+    }
+    
+    var maf: Double = 0.0 {
+        didSet {
+            self.mafLabel.text = String(format: "%.1f g/s", maf)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Create camera view
         self.camera = BDStillImageCamera(previewView: self.view)
        
-        // Initialize UI
-        self.setSpeedValue(0.0)
-        self.setRPMValue(0.0)
-        self.setGPSValue(0.0)
-        self.setLoadValue(0.0)
-        self.setPowerValue(0.0)
-        self.setTempValue(0.0)
-        self.setMAFValue(0.0)
-        
         // Set delegates
         self.obd.delegate = self
         self.gps.delegate = self
@@ -113,34 +145,6 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         self.statusLabel.text = "Status: " + text
     }
     
-    func setSpeedValue(value: Double) {
-        self.speedLabel.text = String(format: "%.0f", value)
-    }
-    
-    func setRPMValue(value: Double) {
-        self.rpmLabel.text = String(format: "%.0f", value)
-    }
-    
-    func setGPSValue(value: Double) {
-        self.gpsSpeedLabel.text = String(format: "%.0f", value)
-    }
-    
-    func setLoadValue(value: Double) {
-        self.loadLabel.text = String(format: "%.0f %%", value)
-    }
-    
-    func setPowerValue(value: Double) {
-        self.powerLabel.text = String(format: "%.0f PS", value)
-    }
-    
-    func setTempValue(value: Double) {
-        self.tempLabel.text = String(format: "%.0f °C", value)
-    }
-    
-    func setMAFValue(value: Double) {
-        self.mafLabel.text = String(format: "%.1f g/s", value)
-    }
-    
     // MARK: - Notification methods
     func applicationWillTerminate() {
         self.obd.close()
@@ -185,12 +189,12 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         
         // Process OBD data
         [
-            OBDIIEngineLoadValue: self.setLoadValue,
-            OBDIIEngineCoolantTemperature: self.setTempValue,
-            OBDIIRPM: self.setRPMValue,
-            OBDIISpeed: self.setSpeedValue,
+            OBDIIEngineLoadValue: { self.load = $0 },
+            OBDIIEngineCoolantTemperature: { self.temperature = $0 },
+            OBDIIRPM: { self.rpm = $0 },
+            OBDIISpeed: { self.speed = $0 },
             OBDIIMAF: {
-                self.setMAFValue($0)
+                self.maf = $0
                 
                 // Source1 https://www.scantool.net/forum/index.php?topic=6439.msg23763#msg23763
                 // Source2 https://thoughtdraw.wordpress.com/2011/02/20/derive-engine-power-using-obd-data/
@@ -199,7 +203,7 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
                 // 46.0 == Net calorific value for diesel (43.0 for gas)
                 // 0.33 == Thermal loss etc.
                 // 1.34 == kW to PS ratio
-                self.setPowerValue($0/15.2 * 46.0 * 0.33 * 1.34)
+                self.power = $0/15.2 * 46.0 * 0.33 * 1.34
             }
         ][identifier]?(value)
     }
@@ -213,7 +217,7 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let speed = locations.last?.speed {
-            self.setGPSValue(speed >= 0 ? speed * 3.6 : 0.0)
+            self.gpsSpeed = speed >= 0 ? speed * 3.6 : 0.0
         }
     }
     
