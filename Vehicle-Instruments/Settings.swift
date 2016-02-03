@@ -46,4 +46,9 @@ class Settings {
         get { return Double(read("efficiency", def: NSNumber(double: 0.33)).doubleValue) }
         set { write("efficiency", val: NSNumber(double: newValue)) }
     }
+    
+    class var speedFactor: Double {
+        get { return Double(read("speedFactor", def: NSNumber(double: 1.0)).doubleValue) }
+        set { write("speedFactor", val: NSNumber(double: newValue)) }
+    }
 }

@@ -331,6 +331,38 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="O8V-Ne-iEX">
+                                        <rect key="frame" x="0.0" y="385" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O8V-Ne-iEX" id="16g-Vy-nfQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Speed-Factor ..." textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xk6-ff-kjv">
+                                                    <rect key="frame" x="220" y="0.0" width="362" height="43"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed-Factor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQe-vI-jZP">
+                                                    <rect key="frame" x="18" y="11" width="200" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="1ZU-Q4-1C2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Xk6-ff-kjv" firstAttribute="centerY" secondItem="16g-Vy-nfQ" secondAttribute="centerY" id="4OH-UC-39h"/>
+                                                <constraint firstItem="Xk6-ff-kjv" firstAttribute="leading" secondItem="uQe-vI-jZP" secondAttribute="trailing" constant="2" id="JqD-ey-8Y6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Xk6-ff-kjv" secondAttribute="trailing" constant="10" id="c6w-fE-3SH"/>
+                                                <constraint firstItem="uQe-vI-jZP" firstAttribute="leading" secondItem="16g-Vy-nfQ" secondAttribute="leadingMargin" constant="10" id="kAg-ne-D1G"/>
+                                                <constraint firstItem="uQe-vI-jZP" firstAttribute="centerY" secondItem="16g-Vy-nfQ" secondAttribute="centerY" id="kdx-Hn-4Am"/>
+                                                <constraint firstItem="Xk6-ff-kjv" firstAttribute="height" secondItem="16g-Vy-nfQ" secondAttribute="height" id="ta1-ky-2AE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -359,6 +391,7 @@
                         <outlet property="ipAdressTextField" destination="9ft-hB-mCg" id="YzY-B7-ePR"/>
                         <outlet property="maxHPTextField" destination="Cbl-yf-zAM" id="TkT-og-Rsi"/>
                         <outlet property="portTextField" destination="dtb-fC-dm0" id="Xts-vz-ZFb"/>
+                        <outlet property="speedFactorTextField" destination="Xk6-ff-kjv" id="3WV-nD-tX7"/>
                         <outlet property="stoichiometricRatioTextField" destination="MFG-Of-EmQ" id="xqP-rl-Ju4"/>
                     </connections>
                 </tableViewController>

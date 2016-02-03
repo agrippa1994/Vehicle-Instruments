@@ -20,6 +20,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var maxHPTextField: UITextField!
     @IBOutlet weak var stoichiometricRatioTextField: UITextField!
     @IBOutlet weak var efficiencyTextField: UITextField!
+    @IBOutlet weak var speedFactorTextField: UITextField!
     
     weak var delegate: SettingsTableViewControllerDelegate?
     
@@ -31,6 +32,7 @@ class SettingsTableViewController: UITableViewController {
         self.maxHPTextField.text = "\(Settings.maxHP)"
         self.stoichiometricRatioTextField.text = "\(Settings.stoichiometricRatio)"
         self.efficiencyTextField.text = "\(Settings.efficiency)"
+        self.speedFactorTextField.text = "\(Settings.speedFactor)"
     }
     
     @IBAction func onCancel(sender: AnyObject) {
@@ -44,6 +46,7 @@ class SettingsTableViewController: UITableViewController {
             Settings.maxHP = try self.maxHPTextField.validateDoubleInRange(0.0, max: 1100.0)
             Settings.stoichiometricRatio = try self.stoichiometricRatioTextField.validateDoubleInRange(1.0, max: 20.0)
             Settings.efficiency = try self.efficiencyTextField.validateDoubleInRange(0.1, max: 1.0)
+            Settings.speedFactor = try self.speedFactorTextField.validateDoubleInRange(0.1, max: 2.0)
             
             self.delegate?.settingsClose(self)
         }
