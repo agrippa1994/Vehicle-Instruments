@@ -192,7 +192,7 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
             OBDIIEngineLoadValue: { self.load = $0 },
             OBDIIEngineCoolantTemperature: { self.temperature = $0 },
             OBDIIRPM: { self.rpm = $0 },
-            OBDIISpeed: { self.speed = $0 },
+            OBDIISpeed: { self.speed = $0 * Settings.speedFactor },
             OBDIIMAF: {
                 self.maf = $0
                 
@@ -203,7 +203,8 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
                 // 46.0 == Net calorific value for diesel (43.0 for gas)
                 // 0.33 == Thermal loss etc.
                 // 1.34 == kW to PS ratio
-                self.power = $0/15.2 * 46.0 * 0.33 * 1.34
+                let hp = $0/Settings.stoichiometricRatio * 46.0 * Settings.efficiency * 1.34
+                self.power = hp > Settings.maxHP ? Settings.maxHP : hp
             }
         ][identifier]?(value)
     }
