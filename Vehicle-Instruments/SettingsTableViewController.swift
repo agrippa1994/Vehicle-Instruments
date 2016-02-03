@@ -9,13 +9,17 @@
 import UIKit
 
 @objc protocol SettingsTableViewControllerDelegate {
-    func settingsClose(controller: SettingsTableViewController, changesToSettings: Bool)
+    func settingsClose(controller: SettingsTableViewController)
+    func settingsCancel(controller: SettingsTableViewController)
 }
 
 class SettingsTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var ipAdressTextField: UITextField!
     @IBOutlet weak var portTextField: UITextField!
+    @IBOutlet weak var maxHPTextField: UITextField!
+    @IBOutlet weak var stoichiometricRatioTextField: UITextField!
+    @IBOutlet weak var efficiencyTextField: UITextField!
     
     weak var delegate: SettingsTableViewControllerDelegate?
     
@@ -24,45 +28,40 @@ class SettingsTableViewController: UITableViewController {
 
         self.ipAdressTextField.text = "\(Settings.ip)"
         self.portTextField.text = "\(Settings.port)"
+        self.maxHPTextField.text = "\(Settings.maxHP)"
+        self.stoichiometricRatioTextField.text = "\(Settings.stoichiometricRatio)"
+        self.efficiencyTextField.text = "\(Settings.efficiency)"
     }
-
+    
+    @IBAction func onCancel(sender: AnyObject) {
+        self.delegate?.settingsCancel(self)
+    }
     
     @IBAction func onDone(sender: AnyObject) {
-        guard let ipString = self.ipAdressTextField.text else {
-            return self.showAlert("Error",
-                text: "Invalid")
+        do {
+            Settings.ip = try self.ipAdressTextField.checkEmptiness()
+            Settings.port = UInt32(try self.portTextField.validateIntegerInRange(1, max: 65535))
+            Settings.maxHP = try self.maxHPTextField.validateDoubleInRange(0.0, max: 1100.0)
+            Settings.stoichiometricRatio = try self.stoichiometricRatioTextField.validateDoubleInRange(1.0, max: 20.0)
+            Settings.efficiency = try self.efficiencyTextField.validateDoubleInRange(0.1, max: 1.0)
+            
+            self.delegate?.settingsClose(self)
         }
-        
-        guard let portString = self.portTextField.text else {
-            return self.showAlert("Error",
-                text: "Invalid")
+        catch TextFieldValidationException.TextNil {
+            self.showAlert("Error", text: "Internal erro (TextNil")
         }
-        
-    
-        if ipString.isEmpty || portString.isEmpty {
-            return self.showAlert("Error",
-                text: "Invalid IP or port")
+        catch TextFieldValidationException.TextEmpty {
+            self.showAlert("Error", text: "Input must not be empty!")
         }
-        
-        guard let port = UInt32(portString) else {
-            return self.showAlert("Error",
-                text: "Port is not an integer")
+        catch TextFieldValidationException.TextIsNotType {
+            self.showAlert("Error", text: "Input is invalid")
         }
-        
-        // Check changes
-        var changes = false
-        if port != Settings.port
-            || ipString != Settings.ip {
-            changes = true
+        catch TextFieldValidationException.RangeMismatch {
+            self.showAlert("Error", text: "Some data values might not be in allowed range")
         }
-        
-        // Store to settings
-        Settings.ip = ipString
-        Settings.port = port
-        
-        // Notify delegate
-        self.delegate?.settingsClose(self,
-            changesToSettings: changes)
+        catch {
+            self.showAlert("Error", text: "Invalid error")
+        }
     }
     
     private func showAlert(title: String, text: String) {

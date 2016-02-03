@@ -221,13 +221,16 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         }
     }
     
-    func settingsClose(controller: SettingsTableViewController, changesToSettings: Bool) {
+    func settingsClose(controller: SettingsTableViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
-        
-        if changesToSettings {
-            obd.close()
-            obd.open()
-        }
+     
+        // Re-initialize connection
+        obd.close()
+        obd.open()
+    }
+    
+    func settingsCancel(controller: SettingsTableViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

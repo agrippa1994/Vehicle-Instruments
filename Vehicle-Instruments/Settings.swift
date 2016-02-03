@@ -36,4 +36,14 @@ class Settings {
         get { return Double(read("maxHP", def: NSNumber(double: 150.0)).doubleValue) }
         set { write("maxHP", val: NSNumber(double: newValue)) }
     }
+    
+    class var stoichiometricRatio: Double {
+        get { return Double(read("stoichiometricRatio", def: NSNumber(double: 15.2)).doubleValue) }
+        set { write("stoichiometricRatio", val: NSNumber(double: newValue)) }
+    }
+    
+    class var efficiency: Double {
+        get { return Double(read("efficiency", def: NSNumber(double: 0.33)).doubleValue) }
+        set { write("efficiency", val: NSNumber(double: newValue)) }
+    }
 }

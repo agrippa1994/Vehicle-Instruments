@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C2D4AD71C620ADB00334B21 /* UITextField+InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D4AD61C620ADB00334B21 /* UITextField+InputValidation.swift */; };
 		3CA0AA4E1C43C4CE00ACBACA /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0AA4D1C43C4CE00ACBACA /* SettingsTableViewController.swift */; };
 		3CA0AA501C43C4F600ACBACA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0AA4F1C43C4F600ACBACA /* Settings.swift */; };
 		3CC05D381C348DE00051E588 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC05D371C348DE00051E588 /* AppDelegate.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C2D4AD61C620ADB00334B21 /* UITextField+InputValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+InputValidation.swift"; sourceTree = "<group>"; };
 		3CA0AA4D1C43C4CE00ACBACA /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		3CA0AA4F1C43C4F600ACBACA /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3CC05D341C348DE00051E588 /* Vehicle-Instruments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vehicle-Instruments.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 			children = (
 				3CC6D2D11C35697100CA1B15 /* Array+Remove.swift */,
 				3CC6D2D21C35697100CA1B15 /* String+Split.swift */,
+				3C2D4AD61C620ADB00334B21 /* UITextField+InputValidation.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C2D4AD71C620ADB00334B21 /* UITextField+InputValidation.swift in Sources */,
 				3CC05D3A1C348DE00051E588 /* ViewController.swift in Sources */,
 				3CC6D2D61C35697100CA1B15 /* String+Split.swift in Sources */,
 				3CA0AA501C43C4F600ACBACA /* Settings.swift in Sources */,
