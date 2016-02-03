@@ -20,8 +20,10 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     @IBOutlet weak var powerLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var mafLabel: UILabel!
+    @IBOutlet weak var durationLabel: UILabel!
     
     var camera: BDStillImageCamera!
+    var lastOBDOperation: NSTimeInterval = NSDate().timeIntervalSince1970
     let gps = CLLocationManager()
     
     let obd = OBDII(messageBuffer: [
@@ -73,6 +75,12 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         }
     }
     
+    var duration: Double = 0.0 {
+        didSet {
+            self.durationLabel.text = String(format: "%.0f ms", duration)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,9 +110,10 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         // Start camera background
         self.camera.startCameraCapture()
  
-        // Initialize OBD
-        self.connectInOneSecond()
-        self.camera.videoCaptureConnection().videoOrientation = .LandscapeRight
+        // Initialize OBD if neccessary
+        if !self.obd.isConnected() {
+            self.connectInOneSecond()
+        }
         
         // Request GPS privileges
         if CLLocationManager.authorizationStatus() == .NotDetermined {
@@ -187,6 +196,10 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     func didReceivedOBDValue(obd: OBDII, identifier: String, value: Double) {
         self.hideStatusText()
         
+        let currentOBDOperation = NSDate().timeIntervalSince1970
+        duration = currentOBDOperation - lastOBDOperation
+        lastOBDOperation = currentOBDOperation
+        
         // Process OBD data
         [
             OBDIIEngineLoadValue: { self.load = $0 },
@@ -224,10 +237,6 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     
     func settingsClose(controller: SettingsTableViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
-     
-        // Re-initialize connection
-        obd.close()
-        obd.open()
     }
     
     func settingsCancel(controller: SettingsTableViewController) {

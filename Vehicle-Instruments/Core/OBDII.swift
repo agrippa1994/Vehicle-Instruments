@@ -181,4 +181,13 @@ class OBDII : NSObject, NSStreamDelegate {
             messageOffset++
         }
     }
+    
+    func isConnected() -> Bool {
+        if self.outStream == nil || self.inStream == nil {
+            return false
+        }
+        
+        return self.outStream!.streamStatus == .Open
+            && self.inStream!.streamStatus == .Open
+    }
 }
