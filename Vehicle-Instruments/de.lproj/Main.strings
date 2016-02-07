@@ -1,0 +1,75 @@
+
+/* Class = "UILabel"; text = "Stoichiometric Ratio"; ObjectID = "01r-7O-rMc"; */
+"01r-7O-rMc.text" = "Stoichiometric Ratio";
+
+/* Class = "UITextField"; placeholder = "Efficiency ..."; ObjectID = "1mr-jV-o6O"; */
+"1mr-jV-o6O.placeholder" = "Efficiency ...";
+
+/* Class = "UILabel"; text = "0 ms"; ObjectID = "6E0-Kd-bJD"; */
+"6E0-Kd-bJD.text" = "0 ms";
+
+/* Class = "UILabel"; text = "0 PS"; ObjectID = "7cV-9L-jWK"; */
+"7cV-9L-jWK.text" = "0 PS";
+
+/* Class = "UITextField"; placeholder = "IP-Adress ..."; ObjectID = "9ft-hB-mCg"; */
+"9ft-hB-mCg.placeholder" = "IP-Adress ...";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "CWj-wl-v55"; */
+"CWj-wl-v55.title" = "Settings";
+
+/* Class = "UITextField"; placeholder = "HP ..."; ObjectID = "Cbl-yf-zAM"; */
+"Cbl-yf-zAM.placeholder" = "HP ...";
+
+/* Class = "UILabel"; text = "0 °C"; ObjectID = "HiJ-ZH-EDB"; */
+"HiJ-ZH-EDB.text" = "0 °C";
+
+/* Class = "UILabel"; text = "0 g/s"; ObjectID = "Khb-JQ-r6h"; */
+"Khb-JQ-r6h.text" = "0 g/s";
+
+/* Class = "UITextField"; placeholder = "Ratio ..."; ObjectID = "MFG-Of-EmQ"; */
+"MFG-Of-EmQ.placeholder" = "Ratio ...";
+
+/* Class = "UILabel"; text = "Max HP"; ObjectID = "N6k-W2-zY7"; */
+"N6k-W2-zY7.text" = "Max HP";
+
+/* Class = "UILabel"; text = "Efficiency"; ObjectID = "RRB-hh-KD5"; */
+"RRB-hh-KD5.text" = "Efficiency";
+
+/* Class = "UITextField"; placeholder = "Speed-Factor ..."; ObjectID = "Xk6-ff-kjv"; */
+"Xk6-ff-kjv.placeholder" = "Speed-Factor ...";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "ZJl-kj-Ms7"; */
+"ZJl-kj-Ms7.text" = "0";
+
+/* Class = "UITextField"; placeholder = "Port ..."; ObjectID = "dtb-fC-dm0"; */
+"dtb-fC-dm0.placeholder" = "Port ...";
+
+/* Class = "UILabel"; text = "Port"; ObjectID = "eb2-cn-H5B"; */
+"eb2-cn-H5B.text" = "Port";
+
+/* Class = "UITableViewSection"; headerTitle = "Vehicle-Data"; ObjectID = "gp2-kw-reF"; */
+"gp2-kw-reF.headerTitle" = "Vehicle-Data";
+
+/* Class = "UILabel"; text = "IP"; ObjectID = "lhz-gc-eaM"; */
+"lhz-gc-eaM.text" = "IP";
+
+/* Class = "UILabel"; text = "0 %"; ObjectID = "m36-oK-jNy"; */
+"m36-oK-jNy.text" = "0 %";
+
+/* Class = "UILabel"; text = "Speed-Factor"; ObjectID = "uQe-vI-jZP"; */
+"uQe-vI-jZP.text" = "Speed-Factor";
+
+/* Class = "UITableViewSection"; footerTitle = "Any changes to the ip address or port will be applied after a restart of the application"; ObjectID = "wQr-dD-MM9"; */
+"wQr-dD-MM9.footerTitle" = "Any changes to the ip address or port will be applied after a restart of the application";
+
+/* Class = "UITableViewSection"; headerTitle = "Server-Settings"; ObjectID = "wQr-dD-MM9"; */
+"wQr-dD-MM9.headerTitle" = "Server-Settings";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "wUn-Fc-dDo"; */
+"wUn-Fc-dDo.text" = "0";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "xl8-cO-xzl"; */
+"xl8-cO-xzl.text" = "0";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "y6r-jw-0lW"; */
+"y6r-jw-0lW.text" = "Label";
