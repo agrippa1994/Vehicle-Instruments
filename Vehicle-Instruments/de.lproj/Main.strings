@@ -1,9 +1,9 @@
 
 /* Class = "UILabel"; text = "Stoichiometric Ratio"; ObjectID = "01r-7O-rMc"; */
-"01r-7O-rMc.text" = "Stoichiometric Ratio";
+"01r-7O-rMc.text" = "Stoichiom. Verhältnis";
 
 /* Class = "UITextField"; placeholder = "Efficiency ..."; ObjectID = "1mr-jV-o6O"; */
-"1mr-jV-o6O.placeholder" = "Efficiency ...";
+"1mr-jV-o6O.placeholder" = "Effizienz ...";
 
 /* Class = "UILabel"; text = "0 ms"; ObjectID = "6E0-Kd-bJD"; */
 "6E0-Kd-bJD.text" = "0 ms";
@@ -12,13 +12,13 @@
 "7cV-9L-jWK.text" = "0 PS";
 
 /* Class = "UITextField"; placeholder = "IP-Adress ..."; ObjectID = "9ft-hB-mCg"; */
-"9ft-hB-mCg.placeholder" = "IP-Adress ...";
+"9ft-hB-mCg.placeholder" = "IP-Adresse ...";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "CWj-wl-v55"; */
-"CWj-wl-v55.title" = "Settings";
+"CWj-wl-v55.title" = "Einstellungen";
 
 /* Class = "UITextField"; placeholder = "HP ..."; ObjectID = "Cbl-yf-zAM"; */
-"Cbl-yf-zAM.placeholder" = "HP ...";
+"Cbl-yf-zAM.placeholder" = "PS ...";
 
 /* Class = "UILabel"; text = "0 °C"; ObjectID = "HiJ-ZH-EDB"; */
 "HiJ-ZH-EDB.text" = "0 °C";
@@ -27,16 +27,16 @@
 "Khb-JQ-r6h.text" = "0 g/s";
 
 /* Class = "UITextField"; placeholder = "Ratio ..."; ObjectID = "MFG-Of-EmQ"; */
-"MFG-Of-EmQ.placeholder" = "Ratio ...";
+"MFG-Of-EmQ.placeholder" = "Verhältnis ...";
 
 /* Class = "UILabel"; text = "Max HP"; ObjectID = "N6k-W2-zY7"; */
-"N6k-W2-zY7.text" = "Max HP";
+"N6k-W2-zY7.text" = "Max PS";
 
 /* Class = "UILabel"; text = "Efficiency"; ObjectID = "RRB-hh-KD5"; */
-"RRB-hh-KD5.text" = "Efficiency";
+"RRB-hh-KD5.text" = "Effizienz";
 
 /* Class = "UITextField"; placeholder = "Speed-Factor ..."; ObjectID = "Xk6-ff-kjv"; */
-"Xk6-ff-kjv.placeholder" = "Speed-Factor ...";
+"Xk6-ff-kjv.placeholder" = "Geschwindkeitsfaktor ...";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "ZJl-kj-Ms7"; */
 "ZJl-kj-Ms7.text" = "0";
@@ -48,7 +48,7 @@
 "eb2-cn-H5B.text" = "Port";
 
 /* Class = "UITableViewSection"; headerTitle = "Vehicle-Data"; ObjectID = "gp2-kw-reF"; */
-"gp2-kw-reF.headerTitle" = "Vehicle-Data";
+"gp2-kw-reF.headerTitle" = "Fahrzeugdaten";
 
 /* Class = "UILabel"; text = "IP"; ObjectID = "lhz-gc-eaM"; */
 "lhz-gc-eaM.text" = "IP";
@@ -57,13 +57,13 @@
 "m36-oK-jNy.text" = "0 %";
 
 /* Class = "UILabel"; text = "Speed-Factor"; ObjectID = "uQe-vI-jZP"; */
-"uQe-vI-jZP.text" = "Speed-Factor";
+"uQe-vI-jZP.text" = "Geschwindigkeitsfaktor";
 
 /* Class = "UITableViewSection"; footerTitle = "Any changes to the ip address or port will be applied after a restart of the application"; ObjectID = "wQr-dD-MM9"; */
-"wQr-dD-MM9.footerTitle" = "Any changes to the ip address or port will be applied after a restart of the application";
+"wQr-dD-MM9.footerTitle" = "Änderungen werden erst nach einem Neustart übernommen";
 
 /* Class = "UITableViewSection"; headerTitle = "Server-Settings"; ObjectID = "wQr-dD-MM9"; */
-"wQr-dD-MM9.headerTitle" = "Server-Settings";
+"wQr-dD-MM9.headerTitle" = "Server-Einstellungen";
 
 /* Class = "UILabel"; text = "0"; ObjectID = "wUn-Fc-dDo"; */
 "wUn-Fc-dDo.text" = "0";
