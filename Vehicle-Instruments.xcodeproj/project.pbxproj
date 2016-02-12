@@ -38,6 +38,7 @@
 		3CC6D2CF1C35697100CA1B15 /* OBDIIPID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBDIIPID.swift; sourceTree = "<group>"; };
 		3CC6D2D11C35697100CA1B15 /* Array+Remove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Remove.swift"; sourceTree = "<group>"; };
 		3CC6D2D21C35697100CA1B15 /* String+Split.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Split.swift"; sourceTree = "<group>"; };
+		3CE5AC181C64E0FC008684EE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		3CF642BA1C5D2C6D00041800 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		43D1CE0A54CECF592A290CDA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		492A091F3722712406A68F70 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3CC05D3C1C348DE00051E588 /* Base */,
+				3CE5AC181C64E0FC008684EE /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

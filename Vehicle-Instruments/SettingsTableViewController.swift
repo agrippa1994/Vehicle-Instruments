@@ -2,7 +2,7 @@
 //  SettingsTableViewController.swift
 //  Vehicle-Instruments
 //
-//  Created by Manuel Stampfl on 11.01.16.
+//  Created by Manuel Leitold on 11.01.16.
 //  Copyright © 2016 mani1337. All rights reserved.
 //
 
@@ -33,6 +33,17 @@ class SettingsTableViewController: UITableViewController {
         self.stoichiometricRatioTextField.text = "\(Settings.stoichiometricRatio)"
         self.efficiencyTextField.text = "\(Settings.efficiency)"
         self.speedFactorTextField.text = "\(Settings.speedFactor)"
+        
+        tableView.backgroundColor = UIColor.clearColor()
+        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        tableView.backgroundView = blurEffectView
+        
+        if let popover = navigationController?.popoverPresentationController {
+            popover.backgroundColor = UIColor.clearColor()
+        }
+        
+        tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
     }
     
     @IBAction func onCancel(sender: AnyObject) {
@@ -51,19 +62,24 @@ class SettingsTableViewController: UITableViewController {
             self.delegate?.settingsClose(self)
         }
         catch TextFieldValidationException.TextNil {
-            self.showAlert("Error", text: "Internal erro (TextNil")
+            self.showAlert("Error",
+                text: "Internal erro (TextNil")
         }
         catch TextFieldValidationException.TextEmpty {
-            self.showAlert("Error", text: "Input must not be empty!")
+            self.showAlert("Error",
+                text: "Input must not be empty!")
         }
         catch TextFieldValidationException.TextIsNotType {
-            self.showAlert("Error", text: "Input is invalid")
+            self.showAlert("Error",
+                text: "Input is invalid")
         }
         catch TextFieldValidationException.RangeMismatch {
-            self.showAlert("Error", text: "Some data values might not be in allowed range")
+            self.showAlert("Error",
+                text: "Some data values might not be in allowed range")
         }
         catch {
-            self.showAlert("Error", text: "Invalid error")
+            self.showAlert("Error",
+                text: "Invalid error")
         }
     }
     

@@ -2,7 +2,7 @@
 //  UITextField+InputValidation.swift
 //  Vehicle-Instruments
 //
-//  Created by Manuel Stampfl on 03.02.16.
+//  Created by Manuel Leitold on 03.02.16.
 //  Copyright © 2016 mani1337. All rights reserved.
 //
 

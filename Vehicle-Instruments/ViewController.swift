@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Vehicle-Instruments
 //
-//  Created by Manuel Stampfl on 30.12.15.
+//  Created by Manuel Leitold on 30.12.15.
 //  Copyright © 2015 mani1337. All rights reserved.
 //
 
@@ -10,8 +10,9 @@ import UIKit
 import CoreLocation
 import BDCamera
 
-class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate, SettingsTableViewControllerDelegate {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, OBDIIDelegate, CLLocationManagerDelegate, SettingsTableViewControllerDelegate {
 
+    // MARK: - Storyboard Outlets
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     @IBOutlet weak var rpmLabel: UILabel!
@@ -22,7 +23,8 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     @IBOutlet weak var mafLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     
-    var camera: BDStillImageCamera!
+    // MARK: - Fields
+    var camera: BDStillImageCamera?
     var lastOBDOperation: NSTimeInterval = NSDate().timeIntervalSince1970
     let gps = CLLocationManager()
     
@@ -84,9 +86,8 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Create camera view
-        self.camera = BDStillImageCamera(previewView: self.view)
-       
+        self.startCamera()
+        
         // Set delegates
         self.obd.delegate = self
         self.gps.delegate = self
@@ -106,9 +107,6 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // Start camera background
-        self.camera.startCameraCapture()
  
         // Initialize OBD if neccessary
         if !self.obd.isConnected() {
@@ -123,11 +121,18 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         }
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let ctrl = segue.destinationViewController as? UINavigationController {
+            ctrl.popoverPresentationController!.delegate = self
+        }
         if let ctrl = (segue.destinationViewController as? UINavigationController)?.topViewController as? SettingsTableViewController {
             ctrl.delegate = self
         }
@@ -140,9 +145,9 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     func updateCameraRotation() {
         switch UIApplication.sharedApplication().statusBarOrientation {
         case .LandscapeLeft:
-            self.camera.previewLayer.connection.videoOrientation = .LandscapeLeft
+            self.camera?.previewLayer.connection.videoOrientation = .LandscapeLeft
         case .LandscapeRight:
-            self.camera.previewLayer.connection.videoOrientation = .LandscapeRight
+            self.camera?.previewLayer.connection.videoOrientation = .LandscapeRight
         default:
             break
         }
@@ -157,16 +162,16 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     // MARK: - Notification methods
     func applicationWillTerminate() {
         self.obd.close()
-        self.camera.stopCameraCapture()
+        self.stopCamera()
     }
     
     func applicationDidEnterBackground() {
         self.obd.close()
-        self.camera.stopCameraCapture()
+        self.stopCamera()
     }
     
     func applicationWillEnterForeground() {
-        self.camera.startCameraCapture()
+        self.startCamera()
         self.obd.open()
     }
     
@@ -178,6 +183,15 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     func connectInOneSecond() {
         self.setStatusText("Connecting in 1 second")
         NSTimer.scheduledTimerWithTimeInterval(1.0, target: self.obd, selector: Selector("open"), userInfo: nil, repeats: false)
+    }
+    
+    // MARK: - UIPopoverPresentationControllerDelegate
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .OverFullScreen
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .OverFullScreen
     }
     
     // MARK: - OBDIIDelegate
@@ -197,7 +211,7 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         self.hideStatusText()
         
         let currentOBDOperation = NSDate().timeIntervalSince1970
-        duration = currentOBDOperation - lastOBDOperation
+        duration = (currentOBDOperation - lastOBDOperation) * 1000.0
         lastOBDOperation = currentOBDOperation
         
         // Process OBD data
@@ -235,6 +249,7 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
         }
     }
     
+    // MARK: - SettingsTableViewControllerDelegate
     func settingsClose(controller: SettingsTableViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -242,5 +257,24 @@ class ViewController: UIViewController, OBDIIDelegate, CLLocationManagerDelegate
     func settingsCancel(controller: SettingsTableViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // MARK: - Methods
+    func startCamera() {
+        AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) {
+            if $0 {
+                dispatch_async(dispatch_get_main_queue()) {
+                    if self.camera == nil {
+                        self.camera = BDStillImageCamera(previewView: self.view)
+                    }
+                    self.camera!.startCameraCapture()
+                }
+            }
+        }
+    }
+    
+    func stopCamera() {
+        self.camera?.stopCameraCapture()
+    }
+    
 }
 

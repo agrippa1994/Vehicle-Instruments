@@ -2,7 +2,7 @@
 //  Settings.swift
 //  Vehicle-Instruments
 //
-//  Created by Manuel Stampfl on 11.01.16.
+//  Created by Manuel Leitold on 11.01.16.
 //  Copyright © 2016 mani1337. All rights reserved.
 //
 

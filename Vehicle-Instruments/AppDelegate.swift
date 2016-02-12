@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Vehicle-Instruments
 //
-//  Created by Manuel Stampfl on 30.12.15.
+//  Created by Manuel Leitold on 30.12.15.
 //  Copyright © 2015 mani1337. All rights reserved.
 //
 
