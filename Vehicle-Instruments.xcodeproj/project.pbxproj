@@ -19,6 +19,7 @@
 		3CC6D2D41C35697100CA1B15 /* OBDIIPID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6D2CF1C35697100CA1B15 /* OBDIIPID.swift */; };
 		3CC6D2D51C35697100CA1B15 /* Array+Remove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6D2D11C35697100CA1B15 /* Array+Remove.swift */; };
 		3CC6D2D61C35697100CA1B15 /* String+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC6D2D21C35697100CA1B15 /* String+Split.swift */; };
+		3CE1430A1C6E8D3800AEBDA2 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE143091C6E8D3800AEBDA2 /* Calculator.swift */; };
 		3CF642BB1C5D2C6D00041800 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF642BA1C5D2C6D00041800 /* AVKit.framework */; };
 		74B60F8EF2EC099E59A3A164 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E279179DDA2B837459D7B04 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		3CC6D2CF1C35697100CA1B15 /* OBDIIPID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OBDIIPID.swift; sourceTree = "<group>"; };
 		3CC6D2D11C35697100CA1B15 /* Array+Remove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Remove.swift"; sourceTree = "<group>"; };
 		3CC6D2D21C35697100CA1B15 /* String+Split.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Split.swift"; sourceTree = "<group>"; };
+		3CE143091C6E8D3800AEBDA2 /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		3CE5AC181C64E0FC008684EE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		3CF642BA1C5D2C6D00041800 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		43D1CE0A54CECF592A290CDA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			children = (
 				3CC6D2CE1C35697100CA1B15 /* OBDII.swift */,
 				3CC6D2CF1C35697100CA1B15 /* OBDIIPID.swift */,
+				3CE143091C6E8D3800AEBDA2 /* Calculator.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				3C2D4AD71C620ADB00334B21 /* UITextField+InputValidation.swift in Sources */,
 				3CC05D3A1C348DE00051E588 /* ViewController.swift in Sources */,
 				3CC6D2D61C35697100CA1B15 /* String+Split.swift in Sources */,
+				3CE1430A1C6E8D3800AEBDA2 /* Calculator.swift in Sources */,
 				3CA0AA501C43C4F600ACBACA /* Settings.swift in Sources */,
 				3CC6D2D51C35697100CA1B15 /* Array+Remove.swift in Sources */,
 				3CC6D2D41C35697100CA1B15 /* OBDIIPID.swift in Sources */,
