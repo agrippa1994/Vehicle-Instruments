@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C168E451C75E84600E4C272 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3C168E431C75E84600E4C272 /* DataModel.xcdatamodeld */; };
+		3C168E4A1C75E9C600E4C272 /* Configuration+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C168E461C75E9C600E4C272 /* Configuration+CoreDataProperties.swift */; };
+		3C168E4B1C75E9C600E4C272 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C168E471C75E9C600E4C272 /* Configuration.swift */; };
+		3C168E4C1C75E9C600E4C272 /* Label+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C168E481C75E9C600E4C272 /* Label+CoreDataProperties.swift */; };
+		3C168E4D1C75E9C600E4C272 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C168E491C75E9C600E4C272 /* Label.swift */; };
+		3C168E4F1C75EA0D00E4C272 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C168E4E1C75EA0D00E4C272 /* CoreData.swift */; };
 		3C2D4AD71C620ADB00334B21 /* UITextField+InputValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2D4AD61C620ADB00334B21 /* UITextField+InputValidation.swift */; };
+		3C9FE8171C7612B000561F72 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C9FE8161C7612B000561F72 /* GPS.swift */; };
 		3CA0AA4E1C43C4CE00ACBACA /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0AA4D1C43C4CE00ACBACA /* SettingsTableViewController.swift */; };
 		3CA0AA501C43C4F600ACBACA /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA0AA4F1C43C4F600ACBACA /* Settings.swift */; };
 		3CC05D381C348DE00051E588 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CC05D371C348DE00051E588 /* AppDelegate.swift */; };
@@ -25,7 +32,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C168E441C75E84600E4C272 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		3C168E461C75E9C600E4C272 /* Configuration+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Configuration+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3C168E471C75E9C600E4C272 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		3C168E481C75E9C600E4C272 /* Label+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Label+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3C168E491C75E9C600E4C272 /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		3C168E4E1C75EA0D00E4C272 /* CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		3C2D4AD61C620ADB00334B21 /* UITextField+InputValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+InputValidation.swift"; sourceTree = "<group>"; };
+		3C9FE8161C7612B000561F72 /* GPS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
 		3CA0AA4D1C43C4CE00ACBACA /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		3CA0AA4F1C43C4F600ACBACA /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3CC05D341C348DE00051E588 /* Vehicle-Instruments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vehicle-Instruments.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +92,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3C168E421C75E82C00E4C272 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				3C168E431C75E84600E4C272 /* DataModel.xcdatamodeld */,
+				3C168E461C75E9C600E4C272 /* Configuration+CoreDataProperties.swift */,
+				3C168E471C75E9C600E4C272 /* Configuration.swift */,
+				3C168E481C75E9C600E4C272 /* Label+CoreDataProperties.swift */,
+				3C168E491C75E9C600E4C272 /* Label.swift */,
+				3C168E4E1C75EA0D00E4C272 /* CoreData.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		3CC05D2B1C348DE00051E588 = {
 			isa = PBXGroup;
 			children = (
@@ -116,9 +143,11 @@
 		3CC6D2CD1C35697100CA1B15 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				3C168E421C75E82C00E4C272 /* CoreData */,
 				3CC6D2CE1C35697100CA1B15 /* OBDII.swift */,
 				3CC6D2CF1C35697100CA1B15 /* OBDIIPID.swift */,
 				3CE143091C6E8D3800AEBDA2 /* Calculator.swift */,
+				3C9FE8161C7612B000561F72 /* GPS.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -255,16 +284,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C168E451C75E84600E4C272 /* DataModel.xcdatamodeld in Sources */,
 				3C2D4AD71C620ADB00334B21 /* UITextField+InputValidation.swift in Sources */,
 				3CC05D3A1C348DE00051E588 /* ViewController.swift in Sources */,
 				3CC6D2D61C35697100CA1B15 /* String+Split.swift in Sources */,
 				3CE1430A1C6E8D3800AEBDA2 /* Calculator.swift in Sources */,
 				3CA0AA501C43C4F600ACBACA /* Settings.swift in Sources */,
+				3C168E4C1C75E9C600E4C272 /* Label+CoreDataProperties.swift in Sources */,
 				3CC6D2D51C35697100CA1B15 /* Array+Remove.swift in Sources */,
+				3C168E4D1C75E9C600E4C272 /* Label.swift in Sources */,
+				3C168E4B1C75E9C600E4C272 /* Configuration.swift in Sources */,
 				3CC6D2D41C35697100CA1B15 /* OBDIIPID.swift in Sources */,
+				3C168E4A1C75E9C600E4C272 /* Configuration+CoreDataProperties.swift in Sources */,
+				3C168E4F1C75EA0D00E4C272 /* CoreData.swift in Sources */,
 				3CC6D2D31C35697100CA1B15 /* OBDII.swift in Sources */,
 				3CC05D381C348DE00051E588 /* AppDelegate.swift in Sources */,
 				3CA0AA4E1C43C4CE00ACBACA /* SettingsTableViewController.swift in Sources */,
+				3C9FE8171C7612B000561F72 /* GPS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +458,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3C168E431C75E84600E4C272 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3C168E441C75E84600E4C272 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 3C168E441C75E84600E4C272 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3CC05D2C1C348DE00051E588 /* Project object */;
 }

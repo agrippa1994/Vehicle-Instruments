@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Xcode 7.0">
+    <entity name="Configuration" representedClassName=".Configuration" syncable="YES">
+        <attribute name="index" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="labels" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Label" inverseName="configuration" inverseEntity="Label" syncable="YES"/>
+    </entity>
+    <entity name="Label" representedClassName=".Label" syncable="YES">
+        <attribute name="height" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="script" attributeType="String" syncable="YES"/>
+        <attribute name="width" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="x" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="y" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="configuration" maxCount="1" deletionRule="Nullify" destinationEntity="Configuration" inverseName="labels" inverseEntity="Configuration" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Configuration" positionX="-801" positionY="576" width="128" height="58"/>
+        <element name="Label" positionX="-587" positionY="626" width="128" height="148"/>
+    </elements>
+</model>

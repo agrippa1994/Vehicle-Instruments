@@ -53,7 +53,13 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods/BDCamera.framework'
+  install_framework 'Pods/ReactiveCocoa.framework'
+  install_framework 'Pods/Result.framework'
+  install_framework 'Pods/iOS_Color_Picker.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods/BDCamera.framework'
+  install_framework 'Pods/ReactiveCocoa.framework'
+  install_framework 'Pods/Result.framework'
+  install_framework 'Pods/iOS_Color_Picker.framework'
 fi

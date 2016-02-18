@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import CoreLocation
 import BDCamera
 
-class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, OBDIIDelegate, CLLocationManagerDelegate, SettingsTableViewControllerDelegate {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate, OBDIIDelegate, SettingsTableViewControllerDelegate {
 
     // MARK: - Storyboard Outlets
     @IBOutlet weak var statusLabel: UILabel!
@@ -26,7 +25,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
     // MARK: - Fields
     var camera: BDStillImageCamera?
     var lastOBDOperation: NSTimeInterval = NSDate().timeIntervalSince1970
-    let gps = CLLocationManager()
+    let gps = GPS()
     
     let obd = OBDII(messageBuffer: [
         try! OBDIIPID.createMessageForIdentifier(OBDIIEngineLoadValue),
@@ -90,12 +89,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         
         // Set delegates
         self.obd.delegate = self
-        self.gps.delegate = self
-        
-        // Initialize GPS
-        self.gps.activityType = .AutomotiveNavigation
-        self.gps.desiredAccuracy = kCLLocationAccuracyBest
-        
+
         // Setup application callbacks
         let center = NSNotificationCenter.defaultCenter()
         center.addObserver(self, selector: Selector("applicationWillTerminate"), name: UIApplicationWillTerminateNotification, object: nil)
@@ -103,6 +97,20 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
         center.addObserver(self, selector: Selector("applicationWillEnterForeground"), name: UIApplicationWillEnterForegroundNotification, object: nil)
         center.addObserver(self, selector: Selector("orientationChanged"), name: UIDeviceOrientationDidChangeNotification, object: nil)
         setStatusText("Connecting ...")
+        
+        // Setup observers
+        self.gps.speedSignal.observeNext { [weak self] speed in
+            self?.gpsSpeed = speed
+        }
+        
+        self.gps.authorizationSignal.observeNext { [weak self] auth in
+            if auth == .AuthorizedWhenInUse {
+                self?.gps.start()
+            } else {
+                self?.gps.stop()
+            }
+        }
+       
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -113,12 +121,7 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
             self.connectInOneSecond()
         }
         
-        // Request GPS privileges
-        if CLLocationManager.authorizationStatus() == .NotDetermined {
-            self.gps.requestWhenInUseAuthorization()
-        } else {
-            self.gps.startUpdatingLocation()
-        }
+        self.gps.request()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -234,19 +237,6 @@ class ViewController: UIViewController, UIPopoverPresentationControllerDelegate,
                 self.power = hp > Settings.maxHP ? Settings.maxHP : hp
             }
         ][identifier]?(value)
-    }
-    
-    // MARK: - CLLocationManagerDelegate
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedWhenInUse {
-            self.gps.startUpdatingLocation()
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let speed = locations.last?.speed {
-            self.gpsSpeed = speed >= 0 ? speed * 3.6 : 0.0
-        }
     }
     
     // MARK: - SettingsTableViewControllerDelegate
